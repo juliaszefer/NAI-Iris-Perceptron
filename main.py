@@ -1,3 +1,5 @@
+from Iris import Iris
+
 # import sys
 #
 # if len(sys.argv) != 4:
@@ -12,6 +14,7 @@
 a = 0.5
 trainSet = "Data/trainSet.txt"
 testSet = "Data/testSet.txt"
+accuracySet = "Data/accuracySet.txt"
 
 
 def howaccurate(correctno, allno):
@@ -19,20 +22,33 @@ def howaccurate(correctno, allno):
 
 
 def sortline(v_line):
+    v_type = "default"
     info = v_line.split(",")
-    vector = (info[0], info[1], info[2], info[3])
-    if len(info) > 4:
-        e = info[4]
-        info_2 = e.split("-")
-        v_type = info_2[1]
-
-    else:
-        v_type = "default"
+    vector = list()
+    for i in range(len(info)):
+        try:
+            vector.append(float(info[i]))
+        except ValueError:
+            v_type = info[i]
+    iris1 = Iris(vector, v_type)
+    return iris1
 
 
 def readfile(path):
     arr = list()
     ffile = open(path, 'r')
     for line in ffile:
-        arr.append(sortline(line))
+        arr.append(sortline(line.replace("\n", "")))
     return arr
+
+
+def decision(isgood):
+    if isgood:
+        return "setosa"
+    else:
+        return "versicolor"
+
+
+trainlist = readfile(trainSet)
+testlist = readfile(testSet)
+accuracylist = readfile(accuracySet)
