@@ -19,7 +19,7 @@ class Perceptron:
     def naucz(self, przewidywana, otrzymana, vector):
         rightside = (przewidywana - otrzymana)*self.a
         for i in range(len(vector)):
-            vector[i] = vector*rightside
+            vector[i] = vector[i]*rightside
         for i in range(len(vector)):
             self.vectorwag[i] += vector[i]
         self.prog += rightside*(-1)
