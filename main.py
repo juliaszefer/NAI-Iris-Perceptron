@@ -25,6 +25,7 @@ def sortline(v_line):
         e = info[4]
         info_2 = e.split("-")
         v_type = info_2[1]
+
     else:
         v_type = "default"
 
